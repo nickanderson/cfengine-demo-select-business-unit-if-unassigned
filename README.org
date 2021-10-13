@@ -1,0 +1,7 @@
+#+title: Automatically select business unit if unspecified
+
+This policy automatically selects a "Business Unit" if one is not specified. It's intended to facilitate interesting data in a demo environment.
+
+A namespace scoped class prefixed with =BusinessUnit_= is defined based on the value of =data:variables.PrimaryBusinessUnit= or if unspecified a Business Unit is selected from =nickanderson:demo_select_business_unit_if_unassigned._business_units=.
+
+

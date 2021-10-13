@@ -1,0 +1,46 @@
+body file control
+{
+  namespace => "nickanderson";
+}
+bundle agent demo_select_business_unit_if_unassigned
+# @brief Automatically select a business unit if not assigned
+# @class BusinessUnit_<UNIT>
+# @variable nickanderson:demo_select_business_unit_if_unassigned._primary_business_unit_var defines the variable to look for the Primary business unit in
+# @variable nickanderson:demo_select_business_unit_if_unassigned._business_units defines the list of business units to select from
+{
+  vars:
+      "_primary_business_unit_var"
+        string => "data:variables.PrimaryBusinessUnit",
+        unless => isvariable( "_primary_business_unit_var" ); # If this is
+                                                              # already defined
+                                                              # by external
+                                                              # data, use that
+
+      "_business_units"
+        slist => { "Accounting", "Development", "HumanResources", "Research", "Security" },
+        unless => isvariable( "_business_units" ); # If this is already defined
+                                                   # by external data, use that
+
+      "_business_units_picklist"
+        slist => maplist("_picked_$(this)", _business_units ),
+        if => not( isvariable( "data:variables:PrimaryBusinessUnit" ));
+
+  classes:
+
+      # Define a class for the primary business unit if defined
+      "BusinessUnit_$($(_primary_business_unit_var))"
+        expression => isvariable( "$(_primary_business_unit_var)" ),
+        scope => "namespace",
+        meta => { "report" };
+
+      # Select a business unit if no class has yet been defined
+      "_picked_BU"
+        select_class => { @(_business_units_picklist) },
+        unless => classmatch( "BusinessUnit_.*" );
+
+      "BusinessUnit_$(_business_units)"
+        expression => "_picked_$(_business_units)",
+        scope => "namespace",
+        meta => { "report" },
+        unless => classmatch( "BusinessUnit_.*" );
+}
