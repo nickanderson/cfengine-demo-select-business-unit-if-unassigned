@@ -36,11 +36,11 @@ bundle agent demo_select_business_unit_if_unassigned
       # Select a business unit if no class has yet been defined
       "_picked_BU"
         select_class => { @(_business_units_picklist) },
-        unless => classmatch( "BusinessUnit_.*" );
+        unless => classmatch( ".*:BusinessUnit_.*" );
 
       "BusinessUnit_$(_business_units)"
         expression => "_picked_$(_business_units)",
         scope => "namespace",
         meta => { "report" },
-        unless => classmatch( "BusinessUnit_.*" );
+        unless => classmatch( ".*:BusinessUnit_.*" );
 }
