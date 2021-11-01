@@ -7,6 +7,7 @@
       "description": "Automatically select a business unit if one is not defined.",
       "tags": ["demo"],
       "repo": "https://github.com/nickanderson/cfengine-demo-select-business-unit-if-unassigned",
+      "by": "https://github.com/nickanderson",
       "steps": [
         "copy policy/main.cf services/demo-select-business-unit-if-unassigned/main.cf",
         "json cfbs/def.json def.json"
