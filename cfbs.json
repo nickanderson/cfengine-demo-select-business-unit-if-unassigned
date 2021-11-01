@@ -4,6 +4,7 @@
   "type": "module",
   "provides": {
     "demo-select-business-unit-if-unassigned": {
+      "description": "Automatically select a business unit if one is not defined.",
       "tags": ["demo"],
       "repo": "https://github.com/nickanderson/cfengine-demo-select-business-unit-if-unassigned",
       "steps": [
