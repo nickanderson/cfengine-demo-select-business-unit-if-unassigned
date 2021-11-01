@@ -5,7 +5,6 @@
   "provides": {
     "demo-select-business-unit-if-unassigned": {
       "tags": ["demo"],
-      "version": "1.0.0",
       "repo": "https://github.com/nickanderson/cfengine-demo-select-business-unit-if-unassigned",
       "steps": [
         "copy policy/main.cf services/demo-select-business-unit-if-unassigned/main.cf",
